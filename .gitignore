@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+.venv/
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Power BI temp files
+*.pbix~lock
