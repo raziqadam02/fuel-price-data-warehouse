@@ -13,11 +13,6 @@ from logs.etl_logs import log_pipeline
 import logging
 import os
 
-# =====================================================
-# 🔧 LOGGING SETUP
-# =====================================================
-
-# Ensure logs folder exists
 os.makedirs("logs", exist_ok=True)
 
 logging.basicConfig(
@@ -25,11 +20,6 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
-
-
-# =====================================================
-# 🔥 PIPELINE FUNCTIONS
-# =====================================================
 
 def run_fuel_pipeline(conn):
     logging.info("Starting fuel pipeline")
@@ -84,11 +74,6 @@ def run_currency_pipeline(conn):
     logging.info(f"Currency pipeline completed | inserted={inserted}, updated={updated}")
     print("Currency pipeline completed")
 
-
-# =====================================================
-# 🚀 MAIN PIPELINE RUNNER
-# =====================================================
-
 def run_pipeline():
     conn = get_connection()
 
@@ -110,11 +95,6 @@ def run_pipeline():
     finally:
         conn.close()
         logging.info("Connection closed")
-
-
-# =====================================================
-# ▶ ENTRY POINT
-# =====================================================
 
 if __name__ == "__main__":
     run_pipeline()

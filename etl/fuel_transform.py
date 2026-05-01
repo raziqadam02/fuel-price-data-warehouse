@@ -16,8 +16,7 @@ def load_fuel_fact(conn):
         'fuel_api',
         r.ingestion_time
     FROM (
-
-        -- 🔥 NORMALIZED ONCE ONLY
+    
         SELECT 
             TO_DATE(date) AS date,
             'RON95' AS fuel_type,
@@ -45,7 +44,6 @@ def load_fuel_fact(conn):
 
     ) r
 
-    -- 🔥 CLEAN JOIN (NO DOUBLE CASTING)
     JOIN FUEL_DB.ANALYTICS.dim_date d
         ON TO_DATE(r.date) = TO_DATE(d.date_key)
 

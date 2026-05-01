@@ -1,15 +1,8 @@
 import requests
 import pandas as pd
 
-# =========================
-# API URL
-# =========================
 URL = "https://open.er-api.com/v6/latest/USD"
 
-
-# =========================
-# 1. FETCH DATA
-# =========================
 def fetch_currency_data():
     response = requests.get(URL)
 
@@ -18,10 +11,6 @@ def fetch_currency_data():
 
     return response.json()
 
-
-# =========================
-# 2. TRANSFORM DATA
-# =========================
 def transform_data(data):
     rates = data.get("rates", {})
 
@@ -32,10 +21,6 @@ def transform_data(data):
 
     return df
 
-
-# =========================
-# 3. LOAD TO SNOWFLAKE
-# =========================
 def load_to_snowflake(conn, df):
     cursor = conn.cursor()
 
@@ -58,12 +43,8 @@ def load_to_snowflake(conn, df):
 
     print(f"Inserted {len(data)} currency rows into Snowflake")
 
-
-# =========================
-# 4. PIPELINE ENTRY POINT (IMPORTANT)
-# =========================
 def run_ingestion(conn):
-    print("🚀 Starting Currency Pipeline...")
+    print("Starting Currency Pipeline...")
 
     data = fetch_currency_data()
     df = transform_data(data)
@@ -74,12 +55,8 @@ def run_ingestion(conn):
 
     load_to_snowflake(conn, df)
 
-    print("✅ Currency ingestion completed successfully")
+    print("Currency ingestion completed successfully")
 
-
-# =========================
-# OPTIONAL LOCAL TEST MODE
-# =========================
 if __name__ == "__main__":
     from ingestion.snowflake_connection import get_connection
 
